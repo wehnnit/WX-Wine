@@ -103,7 +103,7 @@ Future engines (11.0, GPTK packs, etc.) will be published in this repository as 
 
 | Step | Action |
 |:---:|:---|
-| 1 | Download `WehniX Engine 11.11.zip` from the latest [Release]() |
+| 1 | Download `WehniX Engine 11.11.zip` from the latest Release |
 | 2 | Extract the archive |
 | 3 | Place `WehniX Engine 11.11.app` where WehniX expects it, **or** follow WehniX's in-app engine install instructions |
 | 4 | Select **WehniX Engine 11.11** in WehniX → Settings → Wine Engine |
