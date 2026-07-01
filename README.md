@@ -130,8 +130,8 @@ Most users should install engines through the **WehniX** app rather than manuall
 | Engine | Status in WX-Wine |
 |:---|:---|
 | **WehniX Engine 11.11** | Available — DXMT only |
-| WehniX Engine 11.0 | Planned / separate release |
-| Game Porting Toolkit 3.0 | Planned / separate release |
+| WehniX Engine 11.0 | Won't Be released |
+| Game Porting Toolkit 3.0 | Won't Be released |
 
 ---
 
