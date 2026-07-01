@@ -95,7 +95,7 @@ These titles are tested/supported when launched through WehniX with Engine 11.11
 |:---|:---|:---|
 | **WehniX Engine 11.11** | `WehniX Engine 11.11.zip` | ~1.3 GB |
 
-Future engines (11.0, GPTK packs, etc.) will be published in this repository as separate tagged releases.
+Future engines (11.0, GPTK packs, etc.) will be or not be published in this repository as separate tagged releases.
 
 ---
 
