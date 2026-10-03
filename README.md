@@ -87,6 +87,53 @@ These titles are tested/supported when launched through WehniX with Engine 11.11
 
 > Compatibility lists may expand in future WX-Wine releases. Always check the release notes for the engine version you download.
 
+The 11.11 list above applies to Engine 11.11 only. It is not a compatibility claim for 11.17.
+
+---
+
+## WX-wine 11.17
+
+Self-contained Wine 11.17 runtime for Apple Silicon, with **DXMT v0.80** as the only game renderer.
+
+| Spec | Detail |
+|:---|:---|
+| **Release name** | WX-wine 11.17 |
+| **Wine base** | Wine 11.17 |
+| **Graphics API** | **DXMT v0.80 only** (DirectX → Metal) |
+| **Architecture** | x86_64 Windows apps via Rosetta on Apple Silicon |
+| **Bundle format** | `WX-wine-11.17.app` |
+| **Download** | `WX-wine-11.17.tar.xz` |
+| **Download size** | ~776 MB |
+| **SHA-256** | `479a76327064f2208b44b21f4228e12f36bd79a67ba0d4734c7a5f8a26c677a2` |
+| **macOS required** | macOS 14.0 (Sonoma) or later |
+| **Archive layout** | One top-level member: `WX-wine-11.17.app/` |
+
+The archive does not include a Steam login or installed games. The first launch downloads the official Windows Steam client into the bundle.
+
+### Patches in 11.17
+
+| Patch | What it does |
+|:---|:---|
+| **Steam VC++ 2015–2019** | Extracts Steam’s official cabinet outside Wine, installs the 14.28 runtime DLLs, and checks that both 32-bit and 64-bit builds load. This avoids Wine’s `FDICopy` cabinet failure (installer exit 1603) when Steam runs the VC++ redistributable. |
+| **DirectX June 2010** | Checks the required helper DLLs in both `system32` and `syswow64` before the Steam step is marked complete. `DXSETUP` itself is not run, because that installer hung. |
+| **Per-game prerequisites** | Only VC++ 2019 and June 2010 DirectX are treated as supported. Other Steam redistributables (for example PhysX or XNA) are reported as unsupported instead of skipped as success. |
+| **DXMT v0.80** | Default game renderer. The DXMT shader cache stays inside the app. D3DMetal and GPTK are not included. |
+| **Steam UI** | Steam’s login window uses the existing CEF repair. Metal HUD is off for Steam and on for games. |
+| **App icon** | WehniX icon on the bundle. |
+
+11.17 does not claim that every Windows game runs. Online play and anti-cheat were not tested for this release.
+
+### How to use 11.17
+
+| Step | Action |
+|:---:|:---|
+| 1 | Download `WX-wine-11.17.tar.xz` from the [v11.17 release](https://github.com/wehnnit/WX-Wine/releases/tag/v11.17) |
+| 2 | Extract it: `tar -xJf WX-wine-11.17.tar.xz` |
+| 3 | Move `WX-wine-11.17.app` where you want to keep it |
+| 4 | On Apple Silicon, install Rosetta if it is not already installed (`softwareupdate --install-rosetta`) |
+| 5 | Open `WX-wine-11.17.app`. The first run downloads official Steam into the bundle |
+| 6 | Install and launch games from that Steam client. DirectX games use DXMT |
+
 ---
 
 ## Downloads
@@ -94,6 +141,7 @@ These titles are tested/supported when launched through WehniX with Engine 11.11
 | Engine | Release asset | Size (approx.) |
 |:---|:---|:---|
 | **WehniX Engine 11.11** | `WehniX Engine 11.11.zip` | ~1.3 GB |
+| **WX-wine 11.17** | `WX-wine-11.17.tar.xz` | ~776 MB |
 
 Future engines (11.0, GPTK packs, etc.) will be or not be published in this repository as separate tagged releases.
 
@@ -130,6 +178,7 @@ Most users should install engines through the **WehniX** app rather than manuall
 | Engine | Status in WX-Wine |
 |:---|:---|
 | **WehniX Engine 11.11** | Available — DXMT only |
+| **WX-wine 11.17** | Available — DXMT v0.80 only |
 | WehniX Engine 11.0 | Won't Be released |
 | Game Porting Toolkit 3.0 | Won't Be released |
 
