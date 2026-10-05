@@ -93,6 +93,8 @@ The 11.11 list above applies to Engine 11.11 only. It is not a compatibility cla
 
 ## WX-wine 11.17
 
+11.17 is an alpha pre-release.
+
 Self-contained Wine 11.17 runtime for Apple Silicon, with **DXMT v0.80** as the only game renderer.
 
 | Spec | Detail |
