@@ -93,8 +93,6 @@ The 11.11 list above applies to Engine 11.11 only. It is not a compatibility cla
 
 ## WX-wine 11.17
 
-11.17 is an alpha pre-release.
-
 Self-contained Wine 11.17 runtime for Apple Silicon, with **DXMT v0.80** as the only game renderer.
 
 | Spec | Detail |
@@ -105,8 +103,8 @@ Self-contained Wine 11.17 runtime for Apple Silicon, with **DXMT v0.80** as the 
 | **Architecture** | x86_64 Windows apps via Rosetta on Apple Silicon |
 | **Bundle format** | `WX-wine-11.17.app` |
 | **Download** | `WX-wine-11.17.tar.xz` |
-| **Download size** | ~776 MB |
-| **SHA-256** | `479a76327064f2208b44b21f4228e12f36bd79a67ba0d4734c7a5f8a26c677a2` |
+| **Download size** | ~669 MB |
+| **SHA-256** | `3d240d2ff9f3dfaf2d4921f151af79169301bd3c459ef641f25ef3eef7802290` |
 | **macOS required** | macOS 14.0 (Sonoma) or later |
 | **Archive layout** | One top-level member: `WX-wine-11.17.app/` |
 
@@ -122,6 +120,10 @@ The archive does not include a Steam login or installed games. The first launch 
 | **DXMT v0.80** | Default game renderer. The DXMT shader cache stays inside the app. D3DMetal and GPTK are not included. |
 | **Steam UI** | Steam’s login window uses the existing CEF repair. Metal HUD is off for Steam and on for games. |
 | **App icon** | WehniX icon on the bundle. |
+| **Steam first-run crash (WoW64 / Rosetta)** | Fixes the intermittent `Steam.exe` page fault at `7BC41139` while "Updating Steam…". Under Rosetta 2, a switch between 32-bit and 64-bit mode could land in the wrong mode; Wine now checks the mode after each switch and retries. CryptoAPI providers stay loaded instead of being unloaded on every operation. |
+| **Crash recovery** | No Wine debugger dialog. The Steam bootstrap retries if Wine crashes, and Steam is relaunched automatically after a crash (up to 3 times). |
+| **DXMT window resize** | The DXMT view follows window resizes, so a game window that grows after start-up (for example a borderless fullscreen switch) no longer shows the image in one corner with black everywhere else. |
+| **Steam networking** | Received TOS/TTL socket data is now delivered on macOS, fixing the Steam networking-sockets assertion "No control data returned even though we asked for TOS" in games that use it. |
 
 11.17 does not claim that every Windows game runs. Online play and anti-cheat were not tested for this release.
 
@@ -143,7 +145,7 @@ The archive does not include a Steam login or installed games. The first launch 
 | Engine | Release asset | Size (approx.) |
 |:---|:---|:---|
 | **WehniX Engine 11.11** | `WehniX Engine 11.11.zip` | ~1.3 GB |
-| **WX-wine 11.17** | `WX-wine-11.17.tar.xz` | ~776 MB |
+| **WX-wine 11.17** | `WX-wine-11.17.tar.xz` | ~669 MB |
 
 Future engines (11.0, GPTK packs, etc.) will be or not be published in this repository as separate tagged releases.
 
