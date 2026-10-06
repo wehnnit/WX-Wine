@@ -104,7 +104,7 @@ Self-contained Wine 11.17 runtime for Apple Silicon, with **DXMT v0.80** as the 
 | **Bundle format** | `WX-wine-11.17.app` |
 | **Download** | `WX-wine-11.17.tar.xz` |
 | **Download size** | ~669 MB |
-| **SHA-256** | `3d240d2ff9f3dfaf2d4921f151af79169301bd3c459ef641f25ef3eef7802290` |
+| **SHA-256** | `daafa42bfd82731ec8a89feb04e55a1876bdba11e31edc05ca766eacac10d081` |
 | **macOS required** | macOS 14.0 (Sonoma) or later |
 | **Archive layout** | One top-level member: `WX-wine-11.17.app/` |
 
@@ -116,7 +116,9 @@ The archive does not include a Steam login or installed games. The first launch 
 |:---|:---|
 | **Steam VC++ 2015–2019** | Extracts Steam’s official cabinet outside Wine, installs the 14.28 runtime DLLs, and checks that both 32-bit and 64-bit builds load. This avoids Wine’s `FDICopy` cabinet failure (installer exit 1603) when Steam runs the VC++ redistributable. |
 | **DirectX June 2010** | Checks the required helper DLLs in both `system32` and `syswow64` before the Steam step is marked complete. `DXSETUP` itself is not run, because that installer hung. |
-| **Per-game prerequisites** | Only VC++ 2019 and June 2010 DirectX are treated as supported. Other Steam redistributables (for example PhysX or XNA) are reported as unsupported instead of skipped as success. |
+| **Per-game prerequisites** | VC++ 2015, 2017 and 2019 (all served by the 14.28 runtime) and June 2010 DirectX are supported. VC++ 2022 is left to Steam's own installer. Other Steam redistributables (for example PhysX or XNA) are reported as unsupported instead of skipped as success. |
+| **CS2 "game file missing or corrupted"** | When Steam's VC++ installer failed inside Wine, its rollback deleted the C++ runtime DLLs that were already in `system32`, so Counter-Strike 2 could not start. Wine's installer now backs up files before overwriting them and restores them on rollback. It also retries a cabinet file it missed. Runtime DLLs whose files are missing still load as Wine builtins, and the launchers put back any missing system DLL before Steam or a game starts. |
+| **DXMT shader cache after moving the app** | The shader cache and Metal HUD log paths now follow the app when it is moved, so DXMT no longer reports "Failed to open file for locking". |
 | **DXMT v0.80** | Default game renderer. The DXMT shader cache stays inside the app. D3DMetal and GPTK are not included. |
 | **Steam UI** | Steam’s login window uses the existing CEF repair. Metal HUD is off for Steam and on for games. |
 | **App icon** | WehniX icon on the bundle. |
